@@ -2,20 +2,25 @@ import styled from "@emotion/styled";
 
 const HeaderDiv = () => {
   const nav = [
-    <img
-      src="https://cdn.discordapp.com/attachments/1071077149605384262/1116240118836117534/image.png"
-      alt=""
-    />,
-    "메인 페이지",
-    "로컬 게시판",
-    "공유 게시판",
+    {
+      key: "/",
+      value: (
+        <img
+          src="https://cdn.discordapp.com/attachments/1071077149605384262/1116240118836117534/image.png"
+          alt=""
+        />
+      ),
+    },
+    { key: "/", value: "메인 페이지" },
+    { key: "/post/local", value: "로컬 게시판" },
+    { key: "/post/share", value: "공유 게시판" },
   ];
   return (
     <>
       <MainDiv>
         <NavDiv>
           {nav.map((e) => (
-            <a >{e}</a>
+            <a href={e.key}>{e.value}</a>
           ))}
         </NavDiv>
         <a href="http://localhost:3000/auth/login">로그인</a>
@@ -59,7 +64,7 @@ const NavDiv = styled.div`
   font-size: 18px;
   display: inline-flex;
   align-items: center;
-  >a {
+  > a {
     > img {
       height: 18px;
     }
