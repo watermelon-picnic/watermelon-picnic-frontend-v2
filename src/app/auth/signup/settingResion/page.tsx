@@ -5,15 +5,49 @@ import HeaderDiv from "@/lib/components/Header";
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { GetResionAllApi, GetResionAllApiResType } from "@/axios/dist";
+import { GetResionAllApi, GetResionAllApiResType, PutUserRegion } from "@/axios/dist";
 
 const SettingResion = () => {
+  const router = useRouter();
   const [region, setRegion] = useState<GetResionAllApiResType>();
   useEffect(() => {
     GetResionAllApi().then((res) => {
       setRegion(res);
     });
   }, []);
+  const [inputValue, setInputValue] = useState<string>('')
+
+   const GetInitial = (str: string) => {
+  const initial = [
+    "ㄱ",
+    "ㄲ",
+    "ㄴ",
+    "ㄷ",
+    "ㄸ",
+    "ㄹ",
+    "ㅁ",
+    "ㅂ",
+    "ㅃ",
+    "ㅅ",
+    "ㅆ",
+    "ㅇ",
+    "ㅈ",
+    "ㅉ",
+    "ㅊ",
+    "ㅋ",
+    "ㅌ",
+    "ㅍ",
+    "ㅎ",
+  ];
+  let result = "";
+  str.split("").map((c, i) => {
+    const utf = c.charCodeAt(0);
+    if (utf >= 44032 && utf <= 55203)
+      result += initial[parseInt(String((utf - 44032) / 588))];
+    else result += c.toUpperCase();
+  });
+  return result;
+};
   return (
     <>
       <HeaderDiv />
@@ -32,18 +66,41 @@ const SettingResion = () => {
               </h1>
             </Title>
 
-            <input placeholder="지역을 입력해주세요. ex)대전광역시, ㄷㅈㄱㅇㅅ"/>
+            <input
+        onChange={(e) => {
+          setInputValue(e.target.value.toUpperCase().replace(/(\s*)/g, ""));
+        }}
+        placeholder="지역을 입력해주세요. ex)대전광역시, ㄷㅈㄱㅇㅅ"
+        value={inputValue}/>
             <p>
-              {region?.regions.map((e) => (
-                <div>{e}</div>
+              {region?.regions.map((e,i) => (
+                 <>
+            {GetInitial(e.replace(/(\s*)/g, "")).includes(inputValue) ||
+            e.replace(/(\s*)/g, "").includes(inputValue) ? (
+              <div
+                key={i}
+                onClick={() => {
+                  setInputValue(e);
+                }}
+              >
+                {e}
+              </div>
+            ) : (
+              <></>
+            )}
+          </>
               ))}
             </p>
 
-            <SubMitBtn>회원가입</SubMitBtn>
-
-            <span>
-              기존 회원이신가요? <a href="./login">로그인 하기</a>
-            </span>
+            <SubMitBtn onClick={() => {
+              if (region?.regions.includes(inputValue)) 
+                PutUserRegion({region: inputValue}).then(() => {
+                  router.push('/')
+                })
+              else 
+                alert('지역을 선택해주세요.')
+              
+            }}>지역 등록</SubMitBtn>
           </div>
         </div>
       </MainDiv>
@@ -80,6 +137,7 @@ const MainDiv = styled.div`
         width: 100%;
         margin-top: 20px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+        padding-left: 10px;
       }
       > p {
         width: 100%;
@@ -87,9 +145,16 @@ const MainDiv = styled.div`
         overflow-y: scroll;
         margin-top: 20px;
         > div {
-          margin: 10px;
-          height: 30px;
+          padding: 10px;
           border-bottom:1px solid rgba(0, 0, 0, 0.1);
+          transition: all 0.2s ease;
+          cursor: pointer;
+          &:hover {
+            background-color: rgba(222,82,86,1);
+            color: rgba(255,255,255);
+          
+
+          }
         }
       }
       > img {
@@ -104,7 +169,7 @@ const MainDiv = styled.div`
         transform: translateX(-50%);
         > a {
           text-decoration: none;
-          color: #de5256;
+          color: rgb(222, 82, 86);
           cursor: pointer;
         }
       }

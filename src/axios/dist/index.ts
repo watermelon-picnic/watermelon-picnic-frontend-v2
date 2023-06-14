@@ -33,3 +33,4 @@ export {
   type GetResionAllApiResType,
 } from "../main/region/all";
 export {PostAnonymousPostingApi} from "../main/post/anonymous/postPosting"
+export {PutUserRegion} from "../main/user/resion"

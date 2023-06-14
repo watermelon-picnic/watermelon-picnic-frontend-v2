@@ -4,9 +4,10 @@ import { LoginApi } from "@/axios/dist";
 import Logo from "@/data/asset/image/logo";
 import HeaderDiv from "@/lib/components/Header";
 import styled from "@emotion/styled";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import cookie from "js-cookie";
 import { useRouter } from "next/navigation";
+import { GetUserMyPageApi } from "@/axios/main/user/my-page";
 
 const Login = () => {
   const router = useRouter();

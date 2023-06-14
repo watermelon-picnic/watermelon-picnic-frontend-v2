@@ -8,7 +8,7 @@ export interface GetUserMyPageApiType {
 export const GetUserMyPageApi = async () => {
   const res: GetUserMyPageApiType = await request({
     method: "GET",
-    url: "/user/my-page",
+    url: "/user/my-page"
   });
   return res;
 };
