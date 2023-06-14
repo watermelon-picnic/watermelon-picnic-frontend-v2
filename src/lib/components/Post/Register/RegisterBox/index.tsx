@@ -1,25 +1,58 @@
 import styled from "@emotion/styled";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { PostAuthPostingApi } from "@/axios/dist";
 
 const RegisterBox = () => {
+  const router = useRouter();
+  const [content, setContent] = useState({
+    title: "",
+    content: "",
+  });
+  const [picture, setPicture] = useState<File>();
+  const [imageSrc, setImageSrc] = useState<string>(
+    "https://cdn.discordapp.com/attachments/1071077149605384262/1116226931315179560/image.png"
+  );
+
+  const encodeFileToBase64 = (fileBlob: File) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(fileBlob);
+    return new Promise((resolve) => {
+      reader.onload = () => {
+        setImageSrc(reader.result as string);
+        // console.log(reader.result as string);
+        resolve("");
+      };
+    });
+  };
   return (
     <MainDiv>
       <h3>글 작성하기</h3>
       <h4>제목</h4>
-      <input placeholder="제목을 입력해주세요." />
+      <input
+        placeholder="제목을 입력해주세요."
+        onChange={(e) => setContent({ ...content, title: e.target.value })}
+      />
       <h4>내용</h4>
-      <textarea placeholder="내용을 입력해주세요." />
+      <textarea
+        placeholder="내용을 입력해주세요."
+        onChange={(e) => setContent({ ...content, content: e.target.value })}
+      />
       <h4>사진</h4>
       <input
         id="LocalRegisterPageFileInput"
         type="file"
-        accept=".jpeg .png .jpg"
+        accept="image/jpeg, image/png, image/jpg"
         style={{ display: "none" }}
+        onChange={(e) => {
+          if (e.target.files) {
+            setPicture(e.target.files[0]);
+            encodeFileToBase64(e.target.files[0]);
+          }
+        }}
       />
       <label htmlFor="LocalRegisterPageFileInput">
-        <img
-          src="https://cdn.discordapp.com/attachments/1071077149605384262/1116226931315179560/image.png"
-          alt=""
-        />
+        <img src={imageSrc} alt="" />
       </label>
       <br />
       <p>
@@ -28,8 +61,24 @@ const RegisterBox = () => {
         }
       </p>
       <div>
-        <button>취소</button>
-        <button>등록</button>
+        <button onClick={() => router.back()}>취소</button>
+        <button
+          onClick={() => {
+            const formData = new FormData();
+            if (picture) formData.append("file", picture);
+            if (!Object.values(content).includes("")) {
+              formData.append(
+                "json-body",
+                new Blob([JSON.stringify(content)], {
+                  type: "application/json",
+                })
+              );
+              PostAuthPostingApi(formData);
+            } else alert("내용을 입력해주세요.");
+          }}
+        >
+          등록
+        </button>
       </div>
     </MainDiv>
   );
