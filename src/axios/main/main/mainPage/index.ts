@@ -1,26 +1,29 @@
 import request from "../..";
 
 export interface MainPageApiResType {
-  banners: {
-    image: string;
-    introduce: string;
-  }[];
-  watermelonLoad: {
-    title: string;
-    regionName: string;
-    introduce: string;
-    writerName: string;
-    image: string;
-    type: string;
-    id: number;
-  }[];
-  variableTravelRegion: {
-    image: string;
-    title: string;
-    content: string;
-    type: string;
-    id: number;
-  };
+  banners: MainPageApiBannersType[];
+  watermelonLoad: MainPageApiWatermelonLoadType[];
+  variableTravelRegion: MainPageApiVariableTravelRegionType[];
+}
+export interface MainPageApiBannersType {
+  image: string;
+  introduce: string;
+}
+export interface MainPageApiWatermelonLoadType {
+  title: string;
+  regionName: string;
+  introduce: string;
+  writerName: string;
+  image: string;
+  type: string;
+  id: number;
+}
+export interface MainPageApiVariableTravelRegionType {
+  image: string;
+  title: string;
+  content: string;
+  type: string;
+  id: number;
 }
 
 export const MainPageApi = async () => {
