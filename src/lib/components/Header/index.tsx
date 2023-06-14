@@ -96,7 +96,7 @@ const NavDiv = styled.div`
   align-items: center;
   > a {
     > img {
-      height: 18px;
+      height: 24px;
     }
   }
 `;
