@@ -66,6 +66,7 @@ const MainDiv = styled.div<{ current: number }>`
         font-size: 50px;
         margin-top: -20px;
         line-height: 10px;
+        cursor: pointer;
       }
     }
   }

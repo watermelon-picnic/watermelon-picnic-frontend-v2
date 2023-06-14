@@ -72,7 +72,9 @@ const RegisterBox = () => {
                   type: "application/json",
                 })
               );
-              PostAuthPostingApi(formData);
+              PostAuthPostingApi(formData).then(() => {
+                router.back();
+              })
             } else alert("내용을 입력해주세요.");
           }}
         >

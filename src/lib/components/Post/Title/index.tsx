@@ -38,7 +38,7 @@ const PostTitle = ({
         ))}
       </Nav>
       <WriteBtn>
-        <button onClick={() => router.push("post/share/register")}>
+        <button onClick={() => router.push(`post/${window.location.pathname.split('/')[2]}/register`)}>
           글쓰기
         </button>
       </WriteBtn>
@@ -57,6 +57,8 @@ const NavDiv = styled.div<{ checked: boolean }>`
   background-color: ${(props) => (props.checked ? "#de5256" : "#e8e8e8")};
   color: ${(props) => (props.checked ? "#fff" : "#000")};
   transition: all 0.2s ease;
+  cursor: pointer;
+  
 `;
 
 const WriteBtn = styled.div`

@@ -28,6 +28,7 @@ const MainDiv = styled.div`
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
 
+  position: relative;
   > img {
     width: 250px;
     height: 250px;
@@ -71,8 +72,19 @@ const MainDiv = styled.div`
       font-weight: 700;
       color: rgba(0, 0, 0, 0.5);
     }
+    >span {
+      position: absolute;
+      bottom: 10px;
+    }
     > h3 {
-      margin-bottom: 16px;
+      margin-bottom: 30px;
+      
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      word-break: break-all;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 `;

@@ -1,7 +1,7 @@
 "use client";
 
 import HeaderDiv from "@/lib/components/Header";
-import RegisterBox from "@/lib/components/Post/Register/ShareRegisterBox";
+import RegisterBox from "@/lib/components/Post/Register/LocalRegisterBox";
 import styled from "@emotion/styled";
 
 const LocalRegisterPage = () => {
