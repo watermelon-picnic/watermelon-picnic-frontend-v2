@@ -1,15 +1,16 @@
 import styled from "@emotion/styled";
 import WmRoadPost from "../Post";
+import { MainPageApiWatermelonLoadType } from "@/axios/dist";
 
-const WatermelonRoad = () => {
+const WatermelonRoad = ({ data }: { data: MainPageApiWatermelonLoadType[] }) => {
   return (
     <>
       <MainDiv>
         <h1>수박 로드</h1>
         <span>순간은 여행이 되고, 여행은 추억이 된다.</span>
         <div>
-          {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(() => (
-            <WmRoadPost />
+          {data.map((e) => (
+            <WmRoadPost data={e}/>
           ))}
         </div>
       </MainDiv>
