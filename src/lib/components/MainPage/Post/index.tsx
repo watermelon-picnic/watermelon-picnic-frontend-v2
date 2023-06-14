@@ -1,14 +1,15 @@
+import { MainPageApiWatermelonLoadType } from "@/axios/dist";
 import styled from "@emotion/styled";
 
-const WmRoadPost = () => {
+const WmRoadPost = ({ data }: { data: MainPageApiWatermelonLoadType }) => {
   return (
     <MainDiv>
-      <img />
+      <img src={data.image} alt="" />
       <div>
-        <div>대전</div>
-        <h2>대전 카페 투어, 분위기 미쳐 ~</h2>
-        <h3>노잼 도시 NO, 카페 성지 대전</h3>
-        <span>eastcopper님의 여행</span>
+        <div>{data.regionName}</div>
+        <h2>{data.title}</h2>
+        <h3>{data.introduce}</h3>
+        <span>{data.writerName}님의 여행</span>
       </div>
     </MainDiv>
   );
@@ -57,7 +58,7 @@ const MainDiv = styled.div`
       color: rgba(0, 0, 0, 0.5);
     }
     > h3 {
-        margin-bottom: 16px;
+      margin-bottom: 16px;
     }
   }
 `;
