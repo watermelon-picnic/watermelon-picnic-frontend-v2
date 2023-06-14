@@ -1,11 +1,12 @@
+import { MainPageApiVariableTravelRegionType } from "@/axios/dist";
 import styled from "@emotion/styled";
 
-const Location = () => {
+const Location = ({ data }: { data: MainPageApiVariableTravelRegionType }) => {
   return (
     <MainDiv>
-      <img src="" alt="" />
-      <h1>일은 서울에서, 여행은 제주에서</h1>
-      <span>지금 제주로 떠나보세요!</span>
+      <img src={data.image} alt="" />
+      <h1>{data.title}</h1>
+      <span>{data.content}</span>
     </MainDiv>
   );
 };
