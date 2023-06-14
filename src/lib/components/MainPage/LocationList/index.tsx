@@ -1,7 +1,12 @@
 import styled from "@emotion/styled";
 import Location from "../Location";
+import { MainPageApiVariableTravelRegionType } from "@/axios/dist";
 
-const LocationList = () => {
+const LocationList = ({
+  data,
+}: {
+  data: MainPageApiVariableTravelRegionType[];
+}) => {
   return (
     <MainDiv>
       <span>
@@ -9,8 +14,8 @@ const LocationList = () => {
       </span>
       <h1>국내의 다양한 여행지를 만나보세요!</h1>
       <div>
-        {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map(() => (
-          <Location />
+        {data.map((e) => (
+          <Location data={e}/>
         ))}
       </div>
     </MainDiv>
