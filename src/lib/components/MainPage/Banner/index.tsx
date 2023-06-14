@@ -60,7 +60,7 @@ const BannerBackground = styled.div<{ imageUrl: string }>`
     background-position: center;
     transition: 0.5s;
     background-image: url(${(props) => props.imageUrl});
-    filter: blur(100px);
+    filter: blur(50px);
   }
 `;
 const BannerContainer = styled.div`

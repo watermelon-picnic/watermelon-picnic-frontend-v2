@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
+import cookie from "js-cookie";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const HeaderDiv = () => {
+  const router = useRouter();
   const nav = [
     {
       key: "/",
@@ -15,6 +19,21 @@ const HeaderDiv = () => {
     { key: "/post/local", value: "로컬 게시판" },
     { key: "/post/share", value: "공유 게시판" },
   ];
+  // const [info, setInfo] = useState<GetUserMyPageApiType | null>();
+  // useEffect(() => {
+  //   GetUserMyPageApi()
+  //     .then((res) => {
+  //       setInfo(res);
+  //       console.log(res)
+  //     })
+  //     .catch(() => {
+  //       setInfo(null);
+  //     });
+  // }, []);
+  const [token, setToken] = useState<string>();
+  useEffect(() => {
+    setToken(cookie.get("accessToken"));
+  }, []);
   return (
     <>
       <MainDiv>
@@ -23,7 +42,18 @@ const HeaderDiv = () => {
             <a href={e.key}>{e.value}</a>
           ))}
         </NavDiv>
-        <a href="http://localhost:3000/auth/login">로그인</a>
+        {token !== undefined ? (
+          <a
+            onClick={() => {
+              cookie.remove("accessToken");
+              router.replace("/auth/login");
+            }}
+          >
+            로그아웃
+          </a>
+        ) : (
+          <a href="http://localhost:3000/auth/login">로그인</a>
+        )}
       </MainDiv>
     </>
   );

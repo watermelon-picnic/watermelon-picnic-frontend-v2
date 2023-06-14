@@ -1,52 +1,67 @@
 "use client";
 
+import {
+  GetPostAnonymousDetailApi,
+  GetPostAuthDetailApi,
+  GetPostAuthDetailApiCommentsType,
+  GetPostAuthDetailApiResType,
+} from "@/axios/dist";
 import HeaderDiv from "@/lib/components/Header";
+import { Spinner } from "@/lib/components/Loading";
 import DetailPageComment from "@/lib/components/Post/Detail/Comment";
 import styled from "@emotion/styled";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
-const ShareDetailPage = () => {
+const LocalDetailPage = () => {
+  const searchParams = useSearchParams();
+  const [data, setData] = useState<GetPostAuthDetailApiResType>();
+  const id = searchParams.get("id") as string;
+  useEffect(() => {
+    GetPostAnonymousDetailApi({ id: id }).then((res) => {
+      setData(res);
+    });
+  }, []);
   return (
     <>
-      <HeaderDiv />
-      <MainDiv>
-        <h1>공유게시판</h1>
-        <hr />
-        <Title>
-          <h2>전북 김제시의 멋진 불꽃</h2>
-          <div>
-            <span>김우닐</span>
-            <div>ㅤ</div>
-            <span>김우닐</span>
-            <div>ㅤ</div>
-            <span>김우닐</span>
-          </div>
-        </Title>
-        <hr />
-        <Content>
-          <img
-            src="https://img.lovepik.com/photo/20211203/medium/lovepik-piles-of-files-picture_501472939.jpg"
-            alt=""
-          />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore
-            optio, repellat sapiente quam eius aut nemo sunt odit cum quis
-            molestias, sint veniam perspiciatis consequatur provident
-            repellendus voluptates amet laborum!
-          </p>
-        </Content>
-
-        <DetailPageComment />
-      </MainDiv>
+      {data ? (
+        <>
+          <HeaderDiv />
+          <MainDiv>
+            <h1>공유 게시판</h1>
+            <hr />
+            <Title>
+              <h2>{data.title}</h2>
+              <div>
+                <span>{data.name}</span>
+                <div>ㅤ</div>
+                <span>{data.region}</span>
+                <div>ㅤ</div>
+                <span>{data.date}</span>
+              </div>
+            </Title>
+            <hr />
+            <Content>
+              {data.photo ? <img src={data.photo} alt="" /> : <></>}
+              <p>{data.content}</p>
+            </Content>
+            <DetailPageComment id={id} data={data.comments} />
+          </MainDiv>
+        </>
+      ) : (
+        <Spinner />
+      )}
     </>
   );
 };
-export default ShareDetailPage;
+export default LocalDetailPage;
 
 const Title = styled.div`
   padding: 20px 30px;
   > h2 {
     font-size: 30px;
     font-weight: 700;
+    margin-bottom: 10px;
   }
   > div {
     display: inline-flex;
@@ -75,6 +90,7 @@ const Content = styled.div`
   > p {
     margin-top: 30px;
     font-size: 24px;
+    white-space: pre-wrap;
   }
 `;
 

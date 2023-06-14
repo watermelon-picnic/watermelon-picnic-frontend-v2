@@ -1,21 +1,26 @@
+import { GetPostAuthApiResType } from "@/axios/dist";
 import styled from "@emotion/styled";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const PostTitle = ({
+  data,
   title,
   subTitle,
+  current,
 }: {
+  data: GetPostAuthApiResType;
   title: string;
   subTitle: string;
+  current: {
+    state: number;
+    setState: (value: number) => void;
+  };
 }) => {
   const router = useRouter();
-  const navList = [
-    "추천하기",
-    "대전광역시",
-    "부산광역시",
-    "대구광역시",
-    "제주도",
-  ];
+  const [navList, setNavList] = useState<string[]>(
+    ["추천 지역"].concat(data.regions)
+  );
   return (
     <>
       <h1>{title}</h1>
@@ -23,7 +28,13 @@ const PostTitle = ({
       <br />
       <Nav>
         {navList.map((e, i) => (
-          <div key={i}>#{e}</div>
+          <NavDiv
+            key={i}
+            checked={i === current.state}
+            onClick={() => current.setState(i)}
+          >
+            #{e}
+          </NavDiv>
         ))}
       </Nav>
       <WriteBtn>
@@ -36,13 +47,26 @@ const PostTitle = ({
 };
 export default PostTitle;
 
+const NavDiv = styled.div<{ checked: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  height: 35px;
+  border-radius: 24px;
+  background-color: ${(props) => (props.checked ? "#de5256" : "#e8e8e8")};
+  color: ${(props) => (props.checked ? "#fff" : "#000")};
+  transition: all 0.2s ease;
+`;
+
 const WriteBtn = styled.div`
   text-align: end;
   > button {
-    padding: 6px 16px;
+    padding: 6px 20px;
     background-color: #de5256;
     color: #fff;
-    font-size: 13px;
+    font-size: 18px;
+    border-radius: 5px;
   }
 `;
 
@@ -50,15 +74,4 @@ const Nav = styled.div`
   display: inline-flex;
   margin-top: 8px;
   gap: 8px;
-
-  > div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 111px;
-    height: 35px;
-    border-radius: 24px;
-    background-color: #e8e8e8;
-    color: #000;
-  }
 `;

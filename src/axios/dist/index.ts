@@ -11,5 +11,25 @@ export {
   type MainPageApiResType,
   type MainPageApiWatermelonLoadType,
   type MainPageApiBannersType,
-  type MainPageApiVariableTravelRegionType
+  type MainPageApiVariableTravelRegionType,
 } from "../main/main/mainPage";
+export {
+  GetPostAuthApi,
+  type GetPostAuthApiResType,
+  type GetPostAuthApiPostsType,
+} from "../main/post/auth/main";
+export {
+  GetPostAuthDetailApi,
+  type GetPostAuthDetailApiResType,
+  type GetPostAuthDetailApiCommentsType,
+} from "../main/post/auth/detail";
+export { GetPostAnonymousApi } from "../main/post/anonymous/main";
+export { GetPostAuthRegionApi } from "../main/post/auth/region";
+export { GetPostAnonymousRegionApi } from "../main/post/anonymous/region";
+export { GetPostAnonymousDetailApi } from "../main/post/anonymous/detail";
+export { DeleteCommentsApi } from "../main/comment/deleteComments";
+export {
+  GetResionAllApi,
+  type GetResionAllApiResType,
+} from "../main/region/all";
+export {PostAnonymousPostingApi} from "../main/post/anonymous/postPosting"

@@ -2,6 +2,7 @@
 
 import { MainPageApi, MainPageApiResType } from "@/axios/main/main/mainPage";
 import HeaderDiv from "@/lib/components/Header";
+import { Spinner } from "@/lib/components/Loading";
 import MainPageBanner from "@/lib/components/MainPage/Banner";
 import LocationList from "@/lib/components/MainPage/LocationList";
 import WatermelonRoad from "@/lib/components/MainPage/WmRoad";
@@ -18,9 +19,9 @@ export default function Home() {
   }, []);
   return (
     <>
-      <HeaderDiv />
       {data ? (
         <>
+          <HeaderDiv />
           <MainPageBanner data={data.banners} />
           <Container>
             <WatermelonRoad data={data.watermelonLoad} />
@@ -28,12 +29,12 @@ export default function Home() {
           </Container>
         </>
       ) : (
-        <></>
+        <Spinner />
       )}
     </>
   );
 }
 
 const Container = styled.div`
-  padding: 0 100px;
+  padding: 0 0 0 100px;
 `;

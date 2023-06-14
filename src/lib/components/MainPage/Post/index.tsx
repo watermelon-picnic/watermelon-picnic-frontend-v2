@@ -6,7 +6,13 @@ const WmRoadPost = ({ data }: { data: MainPageApiWatermelonLoadType }) => {
     <MainDiv>
       <img src={data.image} alt="" />
       <div>
-        <div>{data.regionName}</div>
+        <div>
+          <img
+            src="https://cdn.discordapp.com/attachments/1071077149605384262/1118596869501747280/map-placeholder.png"
+            alt=""
+          />
+          {data.regionName}
+        </div>
         <h2>{data.title}</h2>
         <h3>{data.introduce}</h3>
         <span>{data.writerName}님의 여행</span>
@@ -20,6 +26,7 @@ const MainDiv = styled.div`
   width: 250px;
   border-radius: 15px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 
   > img {
     width: 250px;
@@ -30,9 +37,16 @@ const MainDiv = styled.div`
 
   > div {
     padding: 10px 16px;
-    > div {
+    img {
+      height: 15px;
       width: max-content;
-      padding: 4px 12px;
+    }
+    > div {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      width: max-content;
+      padding: 6px 12px;
       color: #fff;
       font-weight: 500;
       border-radius: 24px;

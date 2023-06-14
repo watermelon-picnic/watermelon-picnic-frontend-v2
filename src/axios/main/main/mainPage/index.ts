@@ -20,7 +20,7 @@ export interface MainPageApiWatermelonLoadType {
 }
 export interface MainPageApiVariableTravelRegionType {
   image: string;
-  title: string;
+  region: string;
   content: string;
   type: string;
   id: number;

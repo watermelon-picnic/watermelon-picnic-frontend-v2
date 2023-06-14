@@ -5,7 +5,7 @@ const Location = ({ data }: { data: MainPageApiVariableTravelRegionType }) => {
   return (
     <MainDiv>
       <img src={data.image} alt="" />
-      <h1>{data.title}</h1>
+      <h1>{data.region}</h1>
       <span>{data.content}</span>
     </MainDiv>
   );

@@ -20,7 +20,6 @@ const RegisterBox = () => {
     return new Promise((resolve) => {
       reader.onload = () => {
         setImageSrc(reader.result as string);
-        // console.log(reader.result as string);
         resolve("");
       };
     });
