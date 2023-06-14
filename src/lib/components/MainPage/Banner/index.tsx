@@ -1,36 +1,41 @@
+import { MainPageApiBannersType } from "@/axios/main/main/mainPage";
 import styled from "@emotion/styled";
+import { useState } from "react";
 
-const MainPageBanner = () => {
+const MainPageBanner = ({ data }: { data: MainPageApiBannersType[] }) => {
+  const [current, setCurrent] = useState(0);
   return (
     <BannerDiv>
-      <BannerBackground>
+      <BannerBackground imageUrl={data[current] ? data[current].image : ""}>
         <div />
       </BannerBackground>
       <BannerContainer>
-        <div>{"<"}</div>
-        <BannerContent>
-          <img
-            src="https://cdn.discordapp.com/attachments/1071077149605384262/1111514558297808896/image.png"
-            alt=""
-          />
-          <div>
-            <span>
-              <span>HOT</span>
-              <h1>
-                {"떠나자 푸르른 바다가 기다리는 곳,\n푸른 바다 푸른 제주!"}
-              </h1>
-            </span>
+        <div onClick={() => setCurrent((3 + current - 1) % 3)}>{"<"}</div>
+        <BannerContent current={-current}>
+          <>
+            <p>
+              {data.map((e) => (
+                <img src={e ? e.image : ""} alt="" />
+              ))}
+            </p>
             <div>
-              <div>
-                <div />
-              </div>
               <span>
-                1<span>/3</span>
+                <span>HOT</span>
+                <h1>{data[current].introduce}</h1>
               </span>
+              <div>
+                <div>
+                  <div />
+                </div>
+                <span>
+                  {current + 1}
+                  <span>/3</span>
+                </span>
+              </div>
             </div>
-          </div>
+          </>
         </BannerContent>
-        <div>{">"}</div>
+        <div onClick={() => setCurrent((current + 1) % 3)}>{">"}</div>
       </BannerContainer>
     </BannerDiv>
   );
@@ -42,7 +47,7 @@ const BannerDiv = styled.div`
   height: 440px;
   position: relative;
 `;
-const BannerBackground = styled.div`
+const BannerBackground = styled.div<{ imageUrl: string }>`
   width: 100%;
   height: 100%;
   position: absolute;
@@ -53,7 +58,8 @@ const BannerBackground = styled.div`
     transform: scale(1.02);
     background-size: cover;
     background-position: center;
-    background-image: url("https://cdn.discordapp.com/attachments/1071077149605384262/1111514558297808896/image.png");
+    transition: 0.5s;
+    background-image: url(${(props) => props.imageUrl});
     filter: blur(100px);
   }
 `;
@@ -67,7 +73,9 @@ const BannerContainer = styled.div`
   > div {
     font-family: "Corben", cursive;
     font-size: 40px;
-    color: #000;
+    color: #fff;
+    text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+    cursor: pointer;
   }
   > span {
     position: absolute;
@@ -75,7 +83,7 @@ const BannerContainer = styled.div`
     left: 300px;
   }
 `;
-const BannerContent = styled.span`
+const BannerContent = styled.span<{ current: number }>`
   display: flex;
   gap: 40px;
   > div {
@@ -100,8 +108,9 @@ const BannerContent = styled.span`
         margin: 0;
         font-size: 24px;
         white-space: pre-wrap;
-        color: #000;
+        color: #fff;
         font-weight: 700;
+        text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
       }
     }
     > div {
@@ -121,6 +130,8 @@ const BannerContent = styled.span`
           height: 100%;
           border-radius: 5px;
           background-color: var(--red-default);
+          transition: all 0.5s ease;
+          transform: translateX(${(props) => -props.current * 100}%);
         }
       }
       > span {
@@ -132,11 +143,18 @@ const BannerContent = styled.span`
       }
     }
   }
-  > img {
+  > p {
+    display: inline-flex;
     width: 550px;
-    height: 350px;
-    object-fit: cover;
-    background-color: #fff;
-    border-radius: 15px;
+    overflow: hidden;
+    > img {
+      transition: all 0.5s ease;
+      transform: translateX(${(props) => props.current * 550}px);
+      width: 550px;
+      height: 350px;
+      object-fit: cover;
+      background-color: #fff;
+      border-radius: 15px;
+    }
   }
 `;
