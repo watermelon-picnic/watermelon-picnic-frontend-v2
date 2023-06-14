@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { useRouter } from "next/navigation";
 
 const PostTitle = ({
   title,
@@ -7,6 +8,7 @@ const PostTitle = ({
   title: string;
   subTitle: string;
 }) => {
+  const router = useRouter();
   const navList = [
     "추천하기",
     "대전광역시",
@@ -25,7 +27,9 @@ const PostTitle = ({
         ))}
       </Nav>
       <WriteBtn>
-        <button>글쓰기</button>
+        <button onClick={() => router.push("post/share/register")}>
+          글쓰기
+        </button>
       </WriteBtn>
     </>
   );
