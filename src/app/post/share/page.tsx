@@ -10,24 +10,74 @@ import Pagenation from "@/lib/components/Post/Pagenation";
 import PostContent from "@/lib/components/Post/Post";
 import PostTitle from "@/lib/components/Post/Title";
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useLayoutEffect } from "react";
 
 const SharePost = () => {
-  const [data, setData] = useState<GetPostAuthApiResType>();
+  const [data, setData] = useState<GetPostAuthApiResType | null>(null);
   const [current, setCurrent] = useState<number>(0);
+  const [cnt, setCnt] = useState<number>(0);
+  const [scrolled, setScrolled] = useState<boolean>(true);
+  const [region, setRegion] = useState<string[]>([]);
   useEffect(() => {
-    if (current === 0)
-      GetPostAnonymousApi({ page: 0, size: 8 }).then((res) => {
-        setData(res);
-      });
-    else if (data)
-      GetPostAnonymousRegionApi({
-        page: 0,
-        size: 8,
-        region: data.regions[current - 1],
-      }).then((res) => {
-        setData(res);
-      });
+    const getData = () => {
+      if (typeof document !== "undefined") {
+        const container = document.getElementById(
+          "container"
+        ) as HTMLDivElement;
+        if (cnt * 8 === container?.children.length || cnt === 0) {
+          if (current === 0)
+            GetPostAnonymousApi({ page: cnt, size: 8 }).then((res) => {
+              setCnt(cnt + 1);
+              setScrolled(false);
+              setData({
+                totalPage: res.totalPage,
+                posts:
+                  data && data.posts ? data.posts.concat(res.posts) : res.posts,
+                regions: res.regions,
+              });
+              setRegion(res.regions);
+            });
+          else
+            GetPostAnonymousRegionApi({
+              page: cnt,
+              size: 8,
+              region: region[current - 1],
+            }).then((res) => {
+              setCnt(cnt + 1);
+              setScrolled(false);
+              setData({
+                totalPage: res.totalPage,
+                posts:
+                  data && data.posts ? data.posts.concat(res.posts) : res.posts,
+                regions: res.regions,
+              });
+            });
+        } else setScrolled(false);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    if (scrolled) {
+      getData();
+    }
+  }, [scrolled, setScrolled]);
+
+  if (typeof window !== "undefined" && typeof document !== "undefined") {
+    window.addEventListener("scroll", (e) => {
+      if (
+        document.body.offsetHeight - window.innerHeight - 5 <=
+        window.scrollY
+      ) {
+        setScrolled(true);
+      }
+    });
+  }
+
+  useLayoutEffect(() => {
+    setCnt(0);
+    setData(null);
+    setScrolled(true);
   }, [current]);
 
   return (
@@ -42,7 +92,7 @@ const SharePost = () => {
               subTitle="현지인이 추천하는 진짜 놀거리!"
               current={{ state: current, setState: setCurrent }}
             />
-            <Container>
+            <Container id="container">
               {data.posts.map((e) => (
                 <PostContent data={e} path="share" />
               ))}

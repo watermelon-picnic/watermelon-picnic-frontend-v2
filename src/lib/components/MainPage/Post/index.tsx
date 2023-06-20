@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 
 const WmRoadPost = ({ data }: { data: MainPageApiWatermelonLoadType }) => {
   return (
-    <MainDiv>
+    <MainDiv href={`/post/${data.type.toLowerCase()}/detail?id=${data.id}`}>
       <img src={data.image} alt="" />
       <div>
         <div>
@@ -22,7 +22,8 @@ const WmRoadPost = ({ data }: { data: MainPageApiWatermelonLoadType }) => {
 };
 export default WmRoadPost;
 
-const MainDiv = styled.div`
+const MainDiv = styled.a`
+  cursor: pointer;
   width: 250px;
   border-radius: 15px;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.1);
@@ -72,13 +73,13 @@ const MainDiv = styled.div`
       font-weight: 700;
       color: rgba(0, 0, 0, 0.5);
     }
-    >span {
+    > span {
       position: absolute;
       bottom: 10px;
     }
     > h3 {
       margin-bottom: 30px;
-      
+
       display: -webkit-box;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;

@@ -119,7 +119,7 @@ const SubMitBtn = styled.button`
 `;
 
 const MainDiv = styled.div`
-  padding: 170px 400px 10px;
+  padding: 20vmin 400px 10px;
   > div {
     border-radius: 10px;
     width: 100%;

@@ -10,6 +10,7 @@ import WatermelonRoad from "@/lib/components/MainPage/WmRoad";
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import cookie from "js-cookie";
 
 export default function Home() {
   const [data, setData] = useState<MainPageApiResType>();
@@ -20,10 +21,11 @@ export default function Home() {
       setData(res);
     });
 
-    GetUserMyPageApi().then((res) => {
-      if (res.region === "지역정보가 없습니다.")
-        router.push("auth/signup/settingResion");
-    })
+    if (cookie.get("accessToken") !== undefined)
+      GetUserMyPageApi().then((res) => {
+        if (res.region === "지역정보가 없습니다.")
+          router.push("auth/signup/settingResion");
+      });
   }, []);
   return (
     <>

@@ -74,10 +74,14 @@ const Signup = () => {
                       password: signupData.password,
                       nickname: signupData.nickname,
                       birth: "050101",
-                    }).then(() => {
-                      alert("회원가입 성공");
-                      router.push("auth/login");
-                    });
+                    })
+                      .then(() => {
+                        alert("회원가입 성공");
+                        router.push("auth/login");
+                      })
+                      .catch(() => {
+                        alert("회원가입 실패");
+                      });
                   else alert("인증번호가 틀렸습니다.");
                 else alert("내용을 입력해주세요.");
               }}
@@ -106,7 +110,7 @@ const SubMitBtn = styled.button<{ check: boolean }>`
 `;
 
 const MainDiv = styled.div`
-  padding: 170px 400px 10px;
+  padding: 20vmin 400px 10px;
   > div {
     border-radius: 10px;
     width: 100%;

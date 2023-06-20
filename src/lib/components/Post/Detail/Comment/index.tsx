@@ -167,6 +167,7 @@ const Comment = styled.div`
     }
     > div:nth-child(2) {
       width: 89%;
+      white-space: pre-wrap;
     }
     > div:nth-child(3) {
       margin: 10px 30px;
