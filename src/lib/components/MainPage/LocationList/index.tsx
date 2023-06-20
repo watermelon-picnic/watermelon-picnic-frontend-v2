@@ -35,8 +35,8 @@ const LocationList = ({
       </h1>
       <div>
         <div>
-          {data.map((e) => (
-            <Location data={e} />
+          {data.map((e, i) => (
+            <Location data={e} key={i}/>
           ))}
         </div>
       </div>

@@ -44,8 +44,8 @@ const DetailPageComment = ({
           전체 댓글 <span>{data.length}</span>개
         </span>
         <hr />
-        {data.map((e) => (
-          <Comment>
+        {data.map((e, i) => (
+          <Comment key={i}>
             <div>
               <div>{e.name}</div>
               <div>{e.content}</div>

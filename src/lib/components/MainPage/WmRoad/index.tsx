@@ -31,8 +31,8 @@ const WatermelonRoad = ({
         </span>
         <div>
           <div>
-            {data.map((e) => (
-              <WmRoadPost data={e} />
+            {data.map((e, i) => (
+              <WmRoadPost data={e} key={i}/>
             ))}
           </div>
         </div>
