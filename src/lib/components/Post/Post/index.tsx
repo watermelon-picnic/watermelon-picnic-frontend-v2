@@ -11,7 +11,7 @@ const PostContent = ({
 }) => {
   return (
     <MainDiv href={`./${path}/detail?id=${data.id}`}>
-      <Image src={data.photo ?? ""} alt="" />
+      <img src={data.photo ?? ""} alt="" />
       <div>
         <h1>{data.title}</h1>
         <p>{data.introduce}</p>

@@ -16,7 +16,7 @@ const MainPageBanner = ({ data }: { data: MainPageApiBannersType[] }) => {
           <>
             <p>
               {data.map((e, i) => (
-                <Image key={i} src={e ? e.image : ""} alt="" />
+                <img key={i} src={e ? e.image : ""} alt="" />
               ))}
             </p>
             <div>

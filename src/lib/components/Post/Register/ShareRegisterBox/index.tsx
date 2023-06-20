@@ -77,7 +77,7 @@ const RegisterBox = () => {
         }}
       />
       <label htmlFor="LocalRegisterPageFileInput">
-        <Image src={imageSrc} alt="" />
+        <img src={imageSrc} alt="" />
       </label>
       <br />
       <p>

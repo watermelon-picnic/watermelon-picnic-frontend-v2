@@ -5,10 +5,10 @@ import Image from "next/image";
 const WmRoadPost = ({ data }: { data: MainPageApiWatermelonLoadType }) => {
   return (
     <MainDiv href={`/post/${data.type.toLowerCase()}/detail?id=${data.id}`}>
-      <Image src={data.image} alt="" />
+      <img src={data.image} alt="" />
       <div>
         <div>
-          <Image
+          <img
             src="https://cdn.discordapp.com/attachments/1071077149605384262/1118596869501747280/map-placeholder.png"
             alt=""
           />

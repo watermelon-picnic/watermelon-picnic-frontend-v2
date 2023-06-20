@@ -52,7 +52,7 @@ const RegisterBox = () => {
         }}
       />
       <label htmlFor="LocalRegisterPageFileInput">
-        <Image src={imageSrc} alt="" />
+        <img src={imageSrc} alt="" />
       </label>
       <br />
       <p>
@@ -75,7 +75,7 @@ const RegisterBox = () => {
               );
               PostAuthPostingApi(formData).then(() => {
                 router.back();
-              })
+              });
             } else alert("내용을 입력해주세요.");
           }}
         >

@@ -10,7 +10,7 @@ const HeaderDiv = () => {
     {
       key: "/",
       value: (
-        <Image
+        <img
           src="https://cdn.discordapp.com/attachments/1071077149605384262/1116240118836117534/image.png"
           alt=""
         />

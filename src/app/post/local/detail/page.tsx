@@ -41,7 +41,7 @@ const LocalDetailPage = () => {
             </Title>
             <hr />
             <Content>
-              {data.photo ? <Image src={data.photo} alt="" /> : <></>}
+              {data.photo ? <img src={data.photo} alt="" /> : <></>}
               <p>{data.content}</p>
             </Content>
             <DetailPageComment id={id} data={data.comments} />

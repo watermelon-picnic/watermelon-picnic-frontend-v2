@@ -31,7 +31,7 @@ const Signup = () => {
       <HeaderDiv />
       <MainDiv>
         <div>
-          <Image
+          <img
             src="https://cdn.discordapp.com/attachments/1071077149605384262/1116231625819295764/image.png"
             alt=""
           />
