@@ -1,5 +1,6 @@
 import { MainPageApiBannersType } from "@/axios/main/main/mainPage";
 import styled from "@emotion/styled";
+import Image from "next/image";
 import { useState } from "react";
 
 const MainPageBanner = ({ data }: { data: MainPageApiBannersType[] }) => {
@@ -15,7 +16,7 @@ const MainPageBanner = ({ data }: { data: MainPageApiBannersType[] }) => {
           <>
             <p>
               {data.map((e) => (
-                <img src={e ? e.image : ""} alt="" />
+                <Image src={e ? e.image : ""} alt="" />
               ))}
             </p>
             <div>

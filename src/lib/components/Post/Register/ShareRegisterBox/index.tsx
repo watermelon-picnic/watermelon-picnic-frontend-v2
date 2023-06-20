@@ -7,6 +7,7 @@ import {
   PostAnonymousPostingApi,
 } from "@/axios/dist";
 import { firstNameData, lastNameData } from "@/lib/export/data";
+import Image from "next/image";
 
 const RegisterBox = () => {
   const router = useRouter();
@@ -76,7 +77,7 @@ const RegisterBox = () => {
         }}
       />
       <label htmlFor="LocalRegisterPageFileInput">
-        <img src={imageSrc} alt="" />
+        <Image src={imageSrc} alt="" />
       </label>
       <br />
       <p>

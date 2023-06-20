@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { PostAuthPostingApi } from "@/axios/dist";
+import Image from "next/image";
 
 const RegisterBox = () => {
   const router = useRouter();
@@ -51,7 +52,7 @@ const RegisterBox = () => {
         }}
       />
       <label htmlFor="LocalRegisterPageFileInput">
-        <img src={imageSrc} alt="" />
+        <Image src={imageSrc} alt="" />
       </label>
       <br />
       <p>

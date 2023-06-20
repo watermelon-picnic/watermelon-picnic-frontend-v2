@@ -6,6 +6,7 @@ import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { GetResionAllApi, GetResionAllApiResType, PutUserRegion } from "@/axios/dist";
+import Image from "next/image";
 
 const SettingResion = () => {
   const router = useRouter();
@@ -53,7 +54,7 @@ const SettingResion = () => {
       <HeaderDiv />
       <MainDiv>
         <div>
-          <img
+          <Image
             src="https://cdn.discordapp.com/attachments/1071077149605384262/1116231625819295764/image.png"
             alt=""
           />

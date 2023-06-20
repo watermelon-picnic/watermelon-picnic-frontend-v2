@@ -1,5 +1,6 @@
 import { GetPostAuthApiPostsType } from "@/axios/dist";
 import styled from "@emotion/styled";
+import Image from "next/image";
 
 const PostContent = ({
   data,
@@ -10,7 +11,7 @@ const PostContent = ({
 }) => {
   return (
     <MainDiv href={`./${path}/detail?id=${data.id}`}>
-      <img src={data.photo ?? ""} alt="" />
+      <Image src={data.photo ?? ""} alt="" />
       <div>
         <h1>{data.title}</h1>
         <p>{data.introduce}</p>

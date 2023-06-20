@@ -1,10 +1,11 @@
 import { MainPageApiVariableTravelRegionType } from "@/axios/dist";
 import styled from "@emotion/styled";
+import Image from "next/image";
 
 const Location = ({ data }: { data: MainPageApiVariableTravelRegionType }) => {
   return (
     <MainDiv>
-      <img src={data.image} alt="" />
+      <Image src={data.image} alt="" />
       <h1>{data.region}</h1>
       <span>{data.content}</span>
     </MainDiv>

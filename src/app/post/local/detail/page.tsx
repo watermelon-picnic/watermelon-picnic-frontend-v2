@@ -8,6 +8,7 @@ import HeaderDiv from "@/lib/components/Header";
 import { Spinner } from "@/lib/components/Loading";
 import DetailPageComment from "@/lib/components/Post/Detail/Comment";
 import styled from "@emotion/styled";
+import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -40,7 +41,7 @@ const LocalDetailPage = () => {
             </Title>
             <hr />
             <Content>
-              {data.photo ? <img src={data.photo} alt="" /> : <></>}
+              {data.photo ? <Image src={data.photo} alt="" /> : <></>}
               <p>{data.content}</p>
             </Content>
             <DetailPageComment id={id} data={data.comments} />

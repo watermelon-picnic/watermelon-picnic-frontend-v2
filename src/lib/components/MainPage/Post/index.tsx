@@ -1,13 +1,14 @@
 import { MainPageApiWatermelonLoadType } from "@/axios/dist";
 import styled from "@emotion/styled";
+import Image from "next/image";
 
 const WmRoadPost = ({ data }: { data: MainPageApiWatermelonLoadType }) => {
   return (
     <MainDiv href={`/post/${data.type.toLowerCase()}/detail?id=${data.id}`}>
-      <img src={data.image} alt="" />
+      <Image src={data.image} alt="" />
       <div>
         <div>
-          <img
+          <Image
             src="https://cdn.discordapp.com/attachments/1071077149605384262/1118596869501747280/map-placeholder.png"
             alt=""
           />

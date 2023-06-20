@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import cookie from "js-cookie";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -9,7 +10,7 @@ const HeaderDiv = () => {
     {
       key: "/",
       value: (
-        <img
+        <Image
           src="https://cdn.discordapp.com/attachments/1071077149605384262/1116240118836117534/image.png"
           alt=""
         />

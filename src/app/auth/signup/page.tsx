@@ -6,6 +6,7 @@ import HeaderDiv from "@/lib/components/Header";
 import styled from "@emotion/styled";
 import { ChangeEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Signup = () => {
   const router = useRouter();
@@ -30,7 +31,7 @@ const Signup = () => {
       <HeaderDiv />
       <MainDiv>
         <div>
-          <img
+          <Image
             src="https://cdn.discordapp.com/attachments/1071077149605384262/1116231625819295764/image.png"
             alt=""
           />

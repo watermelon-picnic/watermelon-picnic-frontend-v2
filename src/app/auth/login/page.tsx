@@ -8,6 +8,7 @@ import { ChangeEvent, useState, useEffect } from "react";
 import cookie from "js-cookie";
 import { useRouter } from "next/navigation";
 import { GetUserMyPageApi } from "@/axios/main/user/my-page";
+import Image from "next/image";
 
 const Login = () => {
   const router = useRouter();
@@ -25,7 +26,7 @@ const Login = () => {
       <HeaderDiv />
       <MainDiv>
         <div>
-          <img
+          <Image
             src="https://cdn.discordapp.com/attachments/1071077149605384262/1116231625819295764/image.png"
             alt=""
           />
